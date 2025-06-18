@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     # Multi kitchens with each chef
     kitchens = list()
-    for index in range(2):
+    for index in range(100):
         p = multiprocessing.Process(target=kitchen, args=(index,))
         kitchens.append(p)
         # starting processes
