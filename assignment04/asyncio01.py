@@ -1,15 +1,14 @@
 # example of getting the current task from the main coroutine
-# Check if a Task is Done
 import asyncio
 
-async def simple_task():
-    await asyncio.sleep(1)
-    return "เสร็จแล้ว!"
-
+# define a main coroutine
 async def  main():
-    task = asyncio.create_task(simple_task())
-    print("ก่อน await", task.done())
-    await task 
-    print("หลัง await", task.done())
+    # report a message
+    print('main coroutine started')
+    # get the current task
+    task = asyncio.current_task()
+    # report its details
+    print(task)
 
+# start the asyncio program
 asyncio.run(main())
