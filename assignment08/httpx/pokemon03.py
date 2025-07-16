@@ -1,5 +1,6 @@
 import asyncio
 import httpx
+import time
 
 async def fetch_pokemon():
     url = "https://pokeapi.co/api/v2/pokemon/pikachu"
@@ -20,4 +21,7 @@ async def fetch_pokemon():
         print(f"Types: {types}")
 
 if __name__ == "__main__":
+    start = time.time()
     asyncio.run(fetch_pokemon())
+    end = time.time()
+    print("Total time:", round(end - start, 2), "seconds")
