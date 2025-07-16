@@ -11,24 +11,31 @@ API_URL = "https://pokeapi.co/api/v2/pokemon/{}"
 
 async def fetch_pokemon(client, name):
     url = API_URL.format(name)
-    resp = await client.get(url)
-    resp.raise_for_status()
-    data = resp.json()
-    return {
-        "name": data["name"].capitalize(),
-        "id": data["id"],
-        "base_experience": data["base_experience"]
-    }
+    try:
+        resp = await client.get(url)
+        resp.raise_for_status()
+        data = resp.json()
+        return {
+            "name": data["name"].capitalize(),
+            "id": data["id"],
+            "base_experience": data["base_experience"]
+        }
+    except Exception as e:
+        print(f"Error fetching {name}: {e}")
+        return None
+
+def sort_by_base_experience(pokemon):
+    return pokemon["base_experience"]
 
 async def main():
     async with httpx.AsyncClient() as client:
         tasks = [fetch_pokemon(client, name) for name in names]
         results = await asyncio.gather(*tasks)
-        sorted_results = sorted(results, key=lambda x: x["base_experience"], reverse=True)
-        print(f"{'Name':<12} {'ID':<4} {'Base Experience':<16}")
-        print("-" * 34)
-        for p in sorted_results:
-            print(f"{p['name']:<12} {p['id']:<4} {p['base_experience']:<16}")
+        clean_results = [res for res in results if res is not None]
+        sorted_pokemon = sorted(clean_results, key=sort_by_base_experience, reverse=True)
+
+    for p in sorted_pokemon:
+        print(f"{p["name"]:<12}\t --> ID:{p["id"]:<5} Base XP:{p["base_experience"]:<16}")
 
 if __name__ == "__main__":
     start = time.time()
