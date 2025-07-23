@@ -2,7 +2,7 @@ import asyncio
 import httpx
 import time
 
-API_URL = "https://pokeapi.co/api/v2/ability/?limit=20"
+API_URL = "https://pokeapi.co/api/v2/ability/?limit=100"
 
 async def fetch_ability_details(client, url):
     resp = await client.get(url)
