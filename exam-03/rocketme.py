@@ -5,8 +5,8 @@ import httpx
 student_id = "6610301008"
 
 async def fire_rocket(name: str, t0: float):
-    url = f"http://172.16.2.117:8088/fire/{student_id}"
-    # url = f"http://127.0.0.1:8088/fire/{student_id}"
+    # url = f"http://172.16.2.117:8088/fire/{student_id}"
+    url = f"http://127.0.0.1:8088/fire/{student_id}"
     start_time = time.perf_counter() - t0  # เวลาเริ่มสัมพัทธ์
     async with httpx.AsyncClient() as client:
         resp = await client.get(url)
