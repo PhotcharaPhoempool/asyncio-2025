@@ -44,7 +44,7 @@ async def main():
     asyncio.create_task(worker(1))
     asyncio.create_task(worker(2))
     asyncio.create_task(worker(3))
-    
+
     # TODO: รอให้ทุก task เสร็จ
     # hint: ใช้ await หรือ asyncio.gather
     await asyncio.sleep(6)
