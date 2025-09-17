@@ -8,9 +8,9 @@ import aiohttp
 import asyncio
 
 async def fetch(url):
-    session = aiohttp.ClientSession()   # ไม่ปิด
-    async with session.get(url) as resp:
-        return await resp.text()
+    async with aiohttp.ClientSession() as session:   # ใช้ async with เพื่อปิด session อัตโนมัติ
+        async with session.get(url) as resp:
+            return await resp.text()
 
 async def main():
     html = await fetch("https://example.com")
