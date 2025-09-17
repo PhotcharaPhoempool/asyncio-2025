@@ -44,9 +44,13 @@ async def main():
     tasks = []
     # TODO: สร้าง asyncio task สำหรับแต่ละ countdown
     # hint: ใช้ asyncio.create_task(countdown(name, sec))
+    tasks.append(asyncio.create_task(countdown("A", 3)))
+    tasks.append(asyncio.create_task(countdown("B", 5)))
+    tasks.append(asyncio.create_task(countdown("C", 2)))
     
     # TODO: รอให้ทุก task เสร็จ
     # hint: ใช้ await หรือ asyncio.gather(*tasks)
+    await asyncio.gather(*tasks)
     pass
 
 asyncio.run(main())
